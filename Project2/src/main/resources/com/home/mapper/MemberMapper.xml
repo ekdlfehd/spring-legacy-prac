@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.home.mapper.MemberMapper">
+	<insert id="memberJoin">
+		insert into shop_member values(#{memberId},
+									   #{memberPw}, 
+									   #{memberName},
+									   #{memberMail},
+									   #{memberAddr1},
+									   #{memberAddr2},
+									   #{memberAddr3},
+									   #{memberNumber},
+									   #{adminCk},
+									   sysdate,
+									   5000)
+	</insert>
+	
+	
+	<!-- 아이디 중복검사 -->
+	<select id = "idCheck" resultType = "int">
+		select count(*) from shop_member where memberId = #{memberId}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id = "memberLogin" resultType="com.home.model.MemberVO">
+		select memberId, memberPw, memberName, adminCk, point from shop_member where memberId = #{memberId}
+	</select>
+	
+	
+</mapper>
