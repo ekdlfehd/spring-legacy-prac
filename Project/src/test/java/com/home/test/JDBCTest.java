@@ -23,7 +23,7 @@ public class JDBCTest {
 				DriverManager.getConnection(
 						"jdbc:oracle:thin:@localhost:1521:XE",
 						"soant",
-						"78343327")){
+						"12345678")){
 			System.out.println(con);
 		} catch (Exception e) {
 			fail(e.getMessage());

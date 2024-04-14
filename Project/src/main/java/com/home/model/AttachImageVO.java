@@ -10,6 +10,7 @@ public class AttachImageVO {
 	private String fileName;
 	// 상품 id
 	private int clothesId;
+	
 	public String getUploadPath() {
 		return uploadPath;
 	}

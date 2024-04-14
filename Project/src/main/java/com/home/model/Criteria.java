@@ -1,5 +1,7 @@
 package com.home.model;
 
+import java.util.Arrays;
+
 public class Criteria {
 	/* 현재 페이지 번호 */
     private int pageNum;
@@ -13,13 +15,23 @@ public class Criteria {
     /* 검색 키워드 */
     private String keyword;
     
+    /* 의류 리스트 */
+    private String[] clothesArr;
+    
+    /* 카테고리 코드 */
+    private String cateCode;
+    
+    /* 카테고리 네임*/
+    private String cateName;
+    
     /* Criteria 생성자 */
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
     }
     
-    /* Criteria 기본 생성자 */
+
+	/* Criteria 기본 생성자 */
     public Criteria(){
         this(1,10);
     }
@@ -61,12 +73,42 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 
-	@Override
-	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword + "]";
+	public String getCateCode() {
+		return cateCode;
 	}
 
-    
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
+	}
+
+
+		public String[] getClothesArr() {
+			return clothesArr;
+		}
+
+		public void setClothesArr(String[] clothesArr) {
+			this.clothesArr = clothesArr;
+		}
+
+
+
+		public String getCateName() {
+			return cateName;
+		}
+
+
+		public void setCateName(String cateName) {
+			this.cateName = cateName;
+		}
+
+
+		@Override
+		public String toString() {
+			return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
+					+ ", clothesArr=" + Arrays.toString(clothesArr) + ", cateCode=" + cateCode + ", cateName="
+					+ cateName + "]";
+		}
+
     
 
 }

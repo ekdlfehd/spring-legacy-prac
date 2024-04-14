@@ -6,6 +6,11 @@
 	
 	<!-- 상품 등록 -->	
 	<insert id = "clothesEnroll">
+		<selectKey resultType="int" keyProperty="clothesId" order="AFTER">
+  			SELECT clothes_seq.currval FROM dual
+  		
+  		</selectKey>
+	
 		insert into clothes(clothesName,cateCode,clothesPrice,clothesStock,clothesDiscount,clothesIntro)
 		values(#{clothesName},#{cateCode},#{clothesPrice},#{clothesStock},#{clothesDiscount},#{clothesIntro})
 	</insert>
@@ -76,8 +81,24 @@
 	<delete id = "goodsDelete">
 		delete from clothes where clothesId = #{clothesId}
 	</delete>
+	
+	<!-- 이미지 정보 삭제 -->
+	<delete id="deleteImageAll">
+		delete from shop_image where clothesId = #{clothesId}
+	</delete>
+	
+		
+	<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="getAttachInfo" resultType="com.home.model.AttachImageVO">
+	
+		select * from shop_image where clothesId = #{clothesId}
+	
+	</select>
 
-
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+		insert into shop_image(clothesId, fileName, uploadPath, uuid) values (#{clothesId}, #{fileName}, #{uploadPath}, #{uuid})
+	</insert>
 
 
 

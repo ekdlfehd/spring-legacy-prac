@@ -2,6 +2,7 @@ package com.home.service;
 
 import java.util.List;
 
+import com.home.model.AttachImageVO;
 import com.home.model.CateVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
@@ -28,4 +29,10 @@ public interface AdminService {
 	
 	/* 상품 삭제 */
 	public int goodsDelete(int clothesId);
+	
+	/* 지정 상품 이미지 정보 얻기 */
+	public List<AttachImageVO> getAttachInfo(int clothesId);
+	
+	/* 이미지 정보 삭제*/
+	public int deleteImageAll(int clothesId);
 }

@@ -6,11 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 
@@ -21,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,11 +33,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.home.mapper.AttachMapper;
 import com.home.model.AttachImageVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
 import com.home.model.PageDTO;
 import com.home.service.AdminService;
+import com.home.service.ClothesService;
 
 import util.Common;
 
@@ -43,6 +49,10 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private AttachMapper attachMapper;
+	@Autowired
+	private ClothesService clothesService;
 	
 	// 관리자 페이지 이동
 	@RequestMapping("admin.do")
@@ -133,6 +143,8 @@ public class AdminController {
 		
 	}
 	
+	// 검색페이지로이동
+	
 	
 	
 	// 상품등록
@@ -157,7 +169,34 @@ public class AdminController {
 	// 상품 삭제
 	@RequestMapping("register_delete.do")
 	public String goodsDeletePOST(int clothesId,RedirectAttributes rttr) {
-		
+			List<AttachImageVO> fileList = adminService.getAttachInfo(clothesId);
+			
+			if(fileList != null) {
+				final List<Path> pathList = new ArrayList();
+				
+				fileList.forEach(new Consumer<AttachImageVO>() {
+					@Override
+					public void accept(AttachImageVO vo) {
+						
+					// 원본 이미지
+					Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
+					pathList.add(path);
+						
+					// 섬네일 이미지
+					path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid()+"_" + vo.getFileName());
+					pathList.add(path);
+						
+					}
+				});
+				
+				pathList.forEach(new Consumer<Path>() {
+					@Override
+					public void accept(Path path) {
+					path.toFile().delete();
+					}
+				});
+			}
+			
 			int result = adminService.goodsDelete(clothesId);
 			
 			rttr.addFlashAttribute("delete_result",result);
@@ -280,6 +319,26 @@ public class AdminController {
 		}
 		
 		return new ResponseEntity<String>("success",HttpStatus.OK);
+	}
+	
+	/* 이미지 정보 반환 */
+	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>> getAttachList(int clothesId){
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachList(clothesId), HttpStatus.OK);
+	}
+	
+	/* 상품검색 */
+	@GetMapping("searchBtn.do")
+	public String searchGoodsGet(Criteria cri,Model model) {
+		
+		List<ClothesVO> list = clothesService.getGoodsList(cri);
+		if(!list.isEmpty()) {
+			model.addAttribute("list",list);
+		}else {
+			model.addAttribute("listCheck","empty");
+		}
+		model.addAttribute("pageMaker", new PageDTO(cri, clothesService.goodsGetTotal(cri)));
+		return Common.VIEW_PATH +"search.jsp";
 	}
 	
 

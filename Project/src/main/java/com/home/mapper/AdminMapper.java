@@ -2,6 +2,7 @@ package com.home.mapper;
 
 import java.util.List;
 
+import com.home.model.AttachImageVO;
 import com.home.model.CateVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
@@ -28,4 +29,14 @@ public interface AdminMapper {
 	
 	/* 상품 삭제 */
 	public int goodsDelete(int clothesId);
+	
+	/* 이미지 등록 */
+	public void imageEnroll(AttachImageVO vo);
+	
+	/* 지정 상품 이미지 정보 얻기 */
+	public List<AttachImageVO> getAttachInfo(int clothesId);
+	
+	/* 이미지 정보 삭제 */
+	public int deleteImageAll(int clothesId);
+	
 }

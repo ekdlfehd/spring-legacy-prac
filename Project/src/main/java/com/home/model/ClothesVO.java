@@ -1,6 +1,7 @@
 package com.home.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ClothesVO {
 	private int clothesId;
@@ -12,6 +13,18 @@ public class ClothesVO {
 	private String clothesIntro;
 	private Date regDate;
 	private Date updateDate;
+	private String cateName;
+	private List<AttachImageVO> imageList;
+	
+	
+	
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
+	
 	public int getClothesId() {
 		return clothesId;
 	}
@@ -67,12 +80,19 @@ public class ClothesVO {
 		this.updateDate = updateDate;
 	}
 	
+
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+	}
 	@Override
 	public String toString() {
 		return "ClothesVO [clothesId=" + clothesId + ", clothesName=" + clothesName + ", cateCode=" + cateCode
 				+ ", clothesPrice=" + clothesPrice + ", clothesStock=" + clothesStock + ", clothesDiscount="
 				+ clothesDiscount + ", clothesIntro=" + clothesIntro + ", regDate=" + regDate + ", updateDate="
-				+ updateDate + "]";
+				+ updateDate + ", cateName=" + cateName + ", imageList=" + imageList + "]";
 	}
 	
 	

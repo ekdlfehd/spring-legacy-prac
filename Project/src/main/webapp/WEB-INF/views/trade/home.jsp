@@ -23,11 +23,26 @@
 				<a href = "register.do" class = "register">상품 등록</a>
 				<a href = "admin.do" class = "register">관리자 페이지</a>
 			</c:if>
+			
 			<div class = "top_links">
+					
 					<a href = "#" class = "sprite wishlist">wishlist</a>
 					<a href = "cart_list.do" class = "sprite cart" data-cart-count= "0">cart</a>
 			</div>
 		</header>
+		
+		<div class="search_wrap">
+        	<form id="searchForm" action="searchBtn.do" method="get">
+            <div class="search_input">
+            	<select name = "type">
+            		<option value ="T">의류이름</option>
+            	</select>
+                <input type="text" name="keyword">
+                <button type="submit" class="btn search_btn">검 색</button>               				
+            </div>
+            </form>
+        </div>
+        
 		<div class = "home_content">
 			<div class = "categories_slide">
 				<div class = "category_menus">

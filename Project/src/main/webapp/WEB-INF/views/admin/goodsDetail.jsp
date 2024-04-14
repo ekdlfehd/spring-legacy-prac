@@ -12,6 +12,16 @@
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">
 </script>
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+</style>
 </head>
 
 <body>
@@ -22,7 +32,7 @@
 
                     		<div class="form_section">
                     			<div class="form_section_title">
-                    				<label>책 제목</label>
+                    				<label>의류 이름</label>
                     			</div>
                     			<div class="form_section_content">
                     				<input name="clothesName" value="<c:out value="${goodsInfo.clothesName}"/>" disabled>
@@ -46,7 +56,7 @@
                     		</div>                    		                    		   
                     		<div class="form_section">
                     			<div class="form_section_title">
-                    				<label>책 카테고리</label>
+                    				<label>의류 카테고리</label>
                     			</div>
                     			<div class="form_section_content">
                     				<div class="cate_wrap">
@@ -101,6 +111,18 @@
                     				<textarea name="clothesIntro" id="clothesIntro_textarea" disabled>${goodsInfo.clothesIntro}</textarea>
                     			</div>
                     		</div>        		
+                    		
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>상품 이미지</label>
+                    			</div>
+                    			<div class="form_section_content">
+
+									<div id="uploadReslut">
+																		
+									</div>
+                    			</div>
+                    		</div>
                     		
 							<div class="btn_section">
 								<a href = "register_list.do" id="cancelBtn" class="btn">상품 목록</a>
@@ -203,6 +225,35 @@
 		$(".cate1 option").each(function(i,obj){
 			if(targetCate2.cateParent === obj.value){
 				$(obj).attr("selected", "selected");
+			}
+		});
+		
+		/* 이미지 정보 호출 */
+		let clothesId = '<c:out value="${goodsInfo.clothesId}"/>';
+		let uploadReslut = $("#uploadReslut");
+		
+		$.getJSON("/getAttachList", {clothesId : clothesId}, function(arr){	
+
+			if(arr.length === 0){		
+				let str = "";
+				str += "<div id='result_card'>";
+				str += "<img src='/resources/img/noimage.jpg'>";
+				str += "</div>";
+				
+				uploadReslut.html(str);	
+				return;
+			}else{
+			let str = "";
+			let obj = arr[0];
+			
+			let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+			str += "<div id='result_card'";
+			str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+			str += ">";
+			str += "<img src='/display?fileName=" + fileCallPath +"'>";
+			str += "</div>";		
+			
+			uploadReslut.html(str);
 			}
 		});
 		
