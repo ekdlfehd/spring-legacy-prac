@@ -73,4 +73,11 @@ public class ClothesServiceImpl implements ClothesService {
 		return goodsInfo;
 	}
 	
+	@Override
+	public ClothesVO getClothesIdName(int clothesId) {
+		
+		return clothesMapper.getClothesIdName(clothesId);
+	}
+	
+	
 }

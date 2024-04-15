@@ -74,4 +74,12 @@
 	
 	</select>
 	
+	<select id="getClothesIdName" resultType="com.home.model.ClothesVO">
+	
+		select clothesId, clothesName from clothes
+		where clothesId = #{clothesId}
+	
+	
+	</select>
+	
   </mapper>

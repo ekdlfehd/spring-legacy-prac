@@ -352,4 +352,14 @@ public class AdminController {
 		
 		return Common.VIEW_PATH +"goodsDetail_list.jsp";
 	}
+	
+	/* 리뷰 쓰기 */
+	@GetMapping("replyEnroll.do{memberId}")
+	public String replyEnrollWindowGET(@PathVariable("memberId")String memberId, int clothesId, Model model) {
+		ClothesVO clothes = clothesService.getClothesIdName(clothesId);
+		model.addAttribute("clothesInfo", clothes);
+		model.addAttribute("memberId", memberId);
+		
+		return Common.VIEW_PATH +"replyEnroll.jsp";
+	}
 }

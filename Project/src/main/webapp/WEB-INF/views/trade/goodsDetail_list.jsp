@@ -120,10 +120,17 @@
 				</div>
 			</div>
 			<div class="line">
-			</div>				
+			</div>			
+				
 			<div class="content_bottom">
 				리뷰
 			</div>
+			
+			<c:if test="${member != null}">
+				<div class="reply_button_wrap">
+					<button>리뷰 쓰기</button>
+				</div>
+			</c:if>
 
 			</div>
 
@@ -252,6 +259,20 @@
 
 						});
 		
+		/* 리뷰쓰기 */
+		$(".reply_button_wrap").on("click", function(e){
+			
+			e.preventDefault();			
+			
+			const memberId = '${member.memberId}';
+			const clothesId = '${goodsInfo.clothesId}';
+
+			let popUrl = "replyEnroll.do" + memberId + "?clothesId=" + clothesId;
+			console.log(popUrl);
+			let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+			
+			window.open(popUrl,"리뷰 쓰기",popOption);
+		});
 	</script>
 </body>
 </html>

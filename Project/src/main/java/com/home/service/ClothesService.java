@@ -13,6 +13,8 @@ public interface ClothesService {
 	public int goodsGetTotal(Criteria cri);
 	/* 상품 정보 */
 	public ClothesVO getGoodsInfo(int clothesId);
+	/* 상품 id 이름 */
+	public ClothesVO getClothesIdName(int clothesId);
 	
 	
 }
