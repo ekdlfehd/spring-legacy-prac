@@ -12,6 +12,7 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
+	href="${pageContext.request.contextPath}/resources/css/goodsDetail_list.css">
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script
@@ -63,91 +64,66 @@
 			</div>
 
 			<div class="content_area">
-
-				<!-- 검색 o -->
-				<c:if test="${listCheck != 'empty' }">
-					<div class="list_search_result">
-						<table class="type_list">
-							<colgroup>
-								<col width="110">
-								<col width="*">
-								<col width="120">
-								<col width="120">
-								<col width="120">
-							</colgroup>
-							<tbody id="searchList">
-								<c:forEach items="${list}" var="list">
-									<tr>
-										<td class="image">
-											<div class="image_wrap" data-clothesid="${list.imageList[0].clothesId}" data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}" data-filename="${list.imageList[0].fileName}">
-	<img>
-</div>
-										</td>
-										<td class="detail">
-											<div class="category">[${list.cateName}]</div>
-											<div class="title"><a href="goodsDetail_list.do${list.clothesId}">
-																${list.clothesName}</a></div>
-										</td>
-										<td class="info">
-											<div class="rating">평점(추후 추가)</div>
-										</td>
-										<td class="price">
-											<div class="org_price">
-												<del> ${list.clothesPrice} 원</del>
-											</div>
-											<div class="sell_price">
-												<strong><fmt:formatNumber
-														value="${list.clothesPrice * (1 - list.clothesDiscount)}"
-														pattern="###,###" /> 원</strong>
-											</div>
-										</td>
-										<td class="option"></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+			
+				<div class="line">
+			</div>			
+			<div class="content_top">
+				<div class="ct_left_area">
+					<div class="image_wrap" data-clothesid="${goodsInfo.imageList[0].clothesId}" data-path="${goodsInfo.imageList[0].uploadPath}" data-uuid="${goodsInfo.imageList[0].uuid}" data-filename="${goodsInfo.imageList[0].fileName}">
+						<img>
+					</div>				
+				</div>
+				<div class="ct_right_area">
+					<div class="title">
+						<h1>
+							[${goodsInfo.cateName}]  
+							${goodsInfo.clothesName}
+						</h1>
 					</div>
-
-					<!-- 페이지 이름 인터페이스 영역 -->
-					<div class="pageMaker_wrap">
-						<ul class="pageMaker">
-
-							<!-- 이전 버튼 -->
-							<c:if test="${pageMaker.prev }">
-								<li class="pageMaker_btn prev"><a
-									href="${pageMaker.pageStart -1}">이전</a></li>
-							</c:if>
-
-							<!-- 페이지 번호 -->
-							<c:forEach begin="${pageMaker.pageStart }"
-								end="${pageMaker.pageEnd }" var="num">
-								<li
-									class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
-									<a href="${num}">${num}</a>
-								</li>
-							</c:forEach>
-
-							<!-- 다음 버튼 -->
-							<c:if test="${pageMaker.next}">
-								<li class="pageMaker_btn next"><a
-									href="${pageMaker.pageEnd + 1 }">다음</a></li>
-							</c:if>
-						</ul>
+					<div class="line">
 					</div>
-
-					<form id="moveForm" action="searchBtn.do" method="get">
-						<input type="hidden" name="pageNum"
-							value="${pageMaker.cri.pageNum}"> <input type="hidden"
-							name="amount" value="${pageMaker.cri.amount}"> <input
-							type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-						<input type="hidden" name="type" value="${pageMaker.cri.type}">
-					</form>
-				</c:if>
-
-				<!-- 검색 x -->
-				<c:if test="${listCheck == 'empty' }">
-					<div class="table_empty">검색결과가 없습니다.</div>
-				</c:if>
+					<div class="line">
+					</div>	
+					<div class="price">
+						<div class="sale_price">정가 : <fmt:formatNumber value="${goodsInfo.clothesPrice}" pattern="#,### 원" /></div>
+						<div class="discount_price">
+							판매가 : <span class="discount_price_number"><fmt:formatNumber value="${goodsInfo.clothesPrice - (goodsInfo.clothesPrice*goodsInfo.clothesDiscount)}" pattern="#,### 원" /></span> 
+							[<fmt:formatNumber value="${goodsInfo.clothesDiscount*100}" pattern="###" />% 
+							<fmt:formatNumber value="${goodsInfo.clothesPrice*goodsInfo.clothesDiscount}" pattern="#,### 원" /> 할인]</div>							
+					</div>			
+					<div class="line">
+					</div>	
+					<div class="button">						
+						<div class="button_quantity">
+							주문수량
+							<input type="text" value="1">
+							<span>
+								<button>+</button>
+								<button>-</button>
+							</span>
+						</div>
+						<div class="button_set">
+							<a class="btn_cart">장바구니 담기</a>
+							<a class="btn_buy">바로구매</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="line">
+			</div>				
+			<div class="content_middle">
+				<div class="clothes_intro">
+				<h1>상품 상세</h1>
+				
+				
+					${goodsInfo.clothesIntro}
+				</div>
+			</div>
+			<div class="line">
+			</div>				
+			<div class="content_bottom">
+				리뷰
+			</div>
 
 			</div>
 

@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.home.mapper.AdminMapper;
 import com.home.mapper.AttachMapper;
 import com.home.mapper.ClothesMapper;
 import com.home.model.AttachImageVO;
@@ -19,6 +20,8 @@ public class ClothesServiceImpl implements ClothesService {
 	private ClothesMapper clothesMapper;
 	@Autowired
 	private AttachMapper attachMapper;
+	@Autowired
+	private AdminMapper adminMapper;
 	
 	/* 상품 검색 */
 	@Override
@@ -59,4 +62,15 @@ public class ClothesServiceImpl implements ClothesService {
 		
 		return clothesMapper.goodsGetTotal(cri);
 	}
+	
+	/* 상품 정보 */
+	/*getGoodsInfo를 사용하면 CLOTHESVO정보와 AdminMapper에서 이미지를 저장해둔 정보가 담겨있음*/
+	@Override
+	public ClothesVO getGoodsInfo(int clothesId) {
+		ClothesVO goodsInfo = clothesMapper.getGoodsInfo(clothesId);
+		goodsInfo.setImageList(adminMapper.getAttachInfo(clothesId));
+		
+		return goodsInfo;
+	}
+	
 }

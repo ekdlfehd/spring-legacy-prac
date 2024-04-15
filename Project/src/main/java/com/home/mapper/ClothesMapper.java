@@ -15,5 +15,8 @@ public interface ClothesMapper {
 	/* 의류 이름 리스트*/
 	public String[] getClothesNameList(String keyword);
 	
+	/* 상품 정보 */
+	public ClothesVO getGoodsInfo(int clothesId);
+	
 
 }
