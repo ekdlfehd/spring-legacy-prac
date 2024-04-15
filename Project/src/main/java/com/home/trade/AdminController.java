@@ -336,6 +336,7 @@ public class AdminController {
 			model.addAttribute("list",list);
 		}else {
 			model.addAttribute("listCheck","empty");
+			return Common.VIEW_PATH +"search.jsp";
 		}
 		model.addAttribute("pageMaker", new PageDTO(cri, clothesService.goodsGetTotal(cri)));
 		return Common.VIEW_PATH +"search.jsp";

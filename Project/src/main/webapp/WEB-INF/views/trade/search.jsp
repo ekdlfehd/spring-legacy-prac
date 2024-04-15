@@ -76,23 +76,27 @@
 								<col width="120">
 							</colgroup>
 							<tbody id="searchList">
-								<c:forEach items="${list}" var="item">
+								<c:forEach items="${list}" var="list">
 									<tr>
-										<td class="image"></td>
+										<td class="image">
+											<div class="image_wrap" data-clothesid="${list.imageList[0].clothesId}" data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}" data-filename="${list.imageList[0].fileName}">
+	<img>
+</div>
+										</td>
 										<td class="detail">
-											<div class="category">[${item.cateName}]</div>
-											<div class="title">${item.clothesName}</div>
+											<div class="category">[${list.cateName}]</div>
+											<div class="title">${list.clothesName}</div>
 										</td>
 										<td class="info">
 											<div class="rating">평점(추후 추가)</div>
 										</td>
 										<td class="price">
 											<div class="org_price">
-												<del> ${item.clothesPrice} 원</del>
+												<del> ${list.clothesPrice} 원</del>
 											</div>
 											<div class="sell_price">
 												<strong><fmt:formatNumber
-														value="${item.clothesPrice * (1 - item.clothesDiscount)}"
+														value="${list.clothesPrice * (1 - list.clothesDiscount)}"
 														pattern="###,###" /> 원</strong>
 											</div>
 										</td>
@@ -244,17 +248,33 @@
 
 		});
 
-		$(document)
-				.ready(
-						function() {
-							// 검색 타입 selected
-							const selectedType = '<c:out value="${pageMaker.cri.type}"/>';
-							if (selectedType != "") {
-								$("select[name='type']").val(selectedType)
-										.attr("selected", "selected");
+		$(document).ready(function() {
+			
+			// 검색 타입 selected
+			const selectedType = '<c:out value="${pageMaker.cri.type}"/>';
+			if (selectedType != "") {
+			$("select[name='type']").val(selectedType).attr("selected", "selected");
 							}
+			/* 이미지 삽입 */
+			$(".image_wrap").each(function(i, obj){
+				
+				const bobj = $(obj);
+				
+				if(bobj.data("clothesid")){
+				const uploadPath = bobj.data("path");
+				const uuid = bobj.data("uuid");
+				const fileName = bobj.data("filename");
+				
+				const fileCallPath = encodeURIComponent(uploadPath + "/" + uuid + "_" + fileName);
+				
+				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+				}else {
+					$(this).find("img").attr('src', '/resources/img/noimage.jpg');
+				}
+			});
 
 						});
+		
 	</script>
 </body>
 </html>
