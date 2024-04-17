@@ -12,7 +12,6 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
-	href="${pageContext.request.contextPath}/resources/css/goodsDetail_list.css">
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script
@@ -113,7 +112,7 @@
 			</div>				
 			<div class="content_middle">
 				<div class="clothes_intro">
-				<h1>상품 상세</h1>
+					<h1>상품 상세</h1>
 				
 				
 					${goodsInfo.clothesIntro}
@@ -123,7 +122,24 @@
 			</div>			
 				
 			<div class="content_bottom">
-				리뷰
+				<div class="clothes_intro">
+					<h1>리 뷰</h1>
+					
+					<div class="reply_not_div">
+					
+					</div>
+					
+						<ul class="reply_content_ul">
+							
+						</ul>
+						
+					<div class="repy_pageInfo_div">
+						<ul class="pageMaker">
+						
+						</ul>
+					</div>
+					
+				</div>
 			</div>
 			
 			<c:if test="${member != null}">
@@ -219,6 +235,7 @@
 				$(this).siblings('li').find('ul').slideUp();
 			});
 		}
+
 		/* 페이지 이동 버튼 */
 		const moveForm = $('#moveForm');
 
@@ -231,6 +248,38 @@
 			moveForm.submit();
 
 		});
+		/* 리뷰쓰기 */
+		$(".reply_button_wrap").on("click", function(e){
+			
+			e.preventDefault();			
+			
+			const memberId = '${member.memberId}';
+			const clothesId = '${goodsInfo.clothesId}';
+			
+			$.ajax({
+				data : {
+					clothesId : clothesId,
+					memberId : memberId
+				},
+				url : "/reply/check",
+				type : 'POST',
+				success : function(result){
+					
+					if(result === '1'){
+						alert("이미 등록된 리뷰가 존재 합니다.")
+					} else if(result === '0'){
+						let popUrl = "replyEnroll.do" + memberId + "?clothesId=" + clothesId;
+						console.log(popUrl);
+						let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+						
+						window.open(popUrl,"리뷰 쓰기",popOption);							
+					}
+				}
+			});
+			
+		});
+		
+		
 
 		$(document).ready(function() {
 			
@@ -256,23 +305,154 @@
 					$(this).find("img").attr('src', '/resources/img/noimage.jpg');
 				}
 			});
+			
+			
+			/* 리뷰 리스트 출력 */
+			const clothesId = '${goodsInfo.clothesId}';	
 
-						});
+			$.getJSON("/reply/list", {clothesId : clothesId}, function(obj){
+				
+				makeReplyContent(obj);
+				
+			}); 
+			
+						}); // $(document).ready(function(){}
+						
+		/* 댓글 페이지 정보 */
+		 const cri = {
+			clothesId : '${goodsInfo.clothesId}',
+			pageNum : 1,
+			amount : 10
+		}				
+						
+						
+		/* 댓글 페이지 이동 버튼 동작 */
+		$(document).on('click', '.pageMaker_btn a', function(e){
+			e.preventDefault();
+			
+			let page = $(this).attr("href");	
+			cri.pageNum = page;		
+			
+			replyListInit();					
+								
+		 });				
+						
+		/* 댓글 데이터 서버 요청 및 댓글 동적 생성 메서드 */
+		let replyListInit = function(){
+			$.getJSON("/reply/list", cri , function(obj){
+								
+				makeReplyContent(obj);
+								
+			});		
+		}					
 		
-		/* 리뷰쓰기 */
-		$(".reply_button_wrap").on("click", function(e){
+		/* 리뷰 수정 버튼 */
+		 $(document).on('click', '.update_reply_btn', function(e){
+			e.preventDefault();
+			let replyId = $(this).attr("href");
+			let popUrl = "/replyUpdate?replyId=" + replyId + "&clothesId=" + '${goodsInfo.clothesId}' + "&memberId=" + '${member.memberId}';	
+			let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes"	
 			
-			e.preventDefault();			
-			
-			const memberId = '${member.memberId}';
-			const clothesId = '${goodsInfo.clothesId}';
+			window.open(popUrl,"리뷰 수정",popOption);
+		 });
+		
+		/* 댓글(리뷰) 동적 생성 메서드 */
+		function makeReplyContent(obj){
+			if(obj.list.length === 0){
+				$(".reply_not_div").html('<span>리뷰가 없습니다.</span>');
+				$(".reply_content_ul").html('');
+				$(".pageMaker").html('');
+			} else{
+				
+				$(".reply_not_div").html('');
+				
+				const list = obj.list;
+				const pf = obj.pageInfo;
+				const userId = '${member.memberId}';		
+				
+				/* list */
+				
+				let reply_list = '';			
+				
+				$(list).each(function(i,obj){
+					reply_list += '<li>';
+					reply_list += '<div class="comment_wrap">';
+					reply_list += '<div class="reply_top">';
+					/* 아이디 */
+					reply_list += '<span class="id_span">'+ obj.memberId+'</span>';
+					/* 날짜 */
+					reply_list += '<span class="date_span">'+ obj.regDate +'</span>';
+					/* 평점 */
+					reply_list += '<span class="rating_span">평점 : <span class="rating_value_span">'+ obj.rating +'</span>점</span>';
+					if(obj.memberId === userId){
+						reply_list += '<a class="update_reply_btn" href="'+ obj.replyId +'">수정</a><a class="delete_reply_btn" href="'+ obj.replyId +'">삭제</a>';
+					}
+					reply_list += '</div>'; //<div class="reply_top">
+					reply_list += '<div class="reply_bottom">';
+					reply_list += '<div class="reply_bottom_txt">'+ obj.content +'</div>';
+					reply_list += '</div>';//<div class="reply_bottom">
+					reply_list += '</div>';//<div class="comment_wrap">
+					reply_list += '</li>';
+				});		
+				
+				$(".reply_content_ul").html(reply_list);			
+				
+				/* 페이지 버튼 */
+				
+				let reply_pageMaker = '';	
+				
+					/* prev */
+					if(pf.prev){
+						let prev_num = pf.pageStart -1;
+						reply_pageMaker += '<li class="pageMaker_btn prev">';
+						reply_pageMaker += '<a href="'+ prev_num +'">이전</a>';
+						reply_pageMaker += '</li>';	
+					}
+					/* numbre btn */
+					for(let i = pf.pageStart; i < pf.pageEnd+1; i++){
+						reply_pageMaker += '<li class="pageMaker_btn ';
+						if(pf.cri.pageNum === i){
+							reply_pageMaker += 'active';
+						}
+						reply_pageMaker += '">';
+						reply_pageMaker += '<a href="'+i+'">'+i+'</a>';
+						reply_pageMaker += '</li>';
+					}
+					/* next */
+					if(pf.next){
+						let next_num = pf.pageEnd +1;
+						reply_pageMaker += '<li class="pageMaker_btn next">';
+						reply_pageMaker += '<a href="'+ next_num +'">다음</a>';
+						reply_pageMaker += '</li>';	
+					}	
+					
+				$(".pageMaker").html(reply_pageMaker);				
+				
+			}
+		}
+		/* 리뷰 삭제 버튼 */
+		 $(document).on('click', '.delete_reply_btn', function(e){
 
-			let popUrl = "replyEnroll.do" + memberId + "?clothesId=" + clothesId;
-			console.log(popUrl);
-			let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+			e.preventDefault();
+			let replyId = $(this).attr("href");	
 			
-			window.open(popUrl,"리뷰 쓰기",popOption);
-		});
+			$.ajax({
+				data : {
+					replyId : replyId,
+					clothesId : '${goodsInfo.clothesId}'
+				},
+				url : '/reply/delete',
+				type : 'POST',
+				success : function(result){
+					replyListInit();
+					alert('삭제가 완료되엇습니다.');
+				}
+			});		
+				
+		 });
+
+		
+
 	</script>
 </body>
 </html>

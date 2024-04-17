@@ -7,4 +7,56 @@
   	<insert id="enrollReply">
   		insert into clothes_reply(clothesId, memberId, content, rating) values(#{clothesId}, #{memberId}, #{content}, #{rating})
   	</insert>
+  	
+  	<!-- 댓글 존재 체크 -->
+  	<select id="checkReply" resultType="integer">
+  		select replyId from clothes_reply
+  		where memberId = #{memberId} and clothesId = #{clothesId}
+  	</select>
+  	
+  	<!-- 댓글 페이징 -->
+  	<select id="getReplyList" resultType="com.home.model.ReplyDTO">
+  	
+  		<![CDATA[
+		select * from(  		
+			select rownum as rn, replyId, clothesId, memberId, content, rating, regDate
+			from clothes_reply
+			where rownum <= #{pageNum} * #{amount}  and clothesId = #{clothesId}	
+			order by regDate desc  	
+  			)
+  		where rn > (#{pageNum} -1) * #{amount}
+  		]]>	
+  		
+  	</select>
+  	
+  	<select id="getReplyTotal" resultType="int">
+  	
+  		select count(*)
+  		from clothes_reply
+  		where clothesId = #{clothesId}
+  	
+  	</select>
+  	
+  	<!-- 댓글수정 -->
+  	<update id="updateReply">
+  	
+  		update clothes_reply set content = #{content}, rating = #{rating}
+  		where replyId = #{replyId}
+  		
+  	</update>
+  	<!-- 댓글 수정 원래글 찾기 -->
+  	<select id="getUpdateReply" resultType="com.home.model.ReplyDTO">
+	
+		select * from clothes_reply
+		where replyId = #{replyId}
+		
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+  	
+  		DELETE FROM clothes_reply
+  		WHERE replyId = #{replyId}
+  		
+  	</delete>
 </mapper>

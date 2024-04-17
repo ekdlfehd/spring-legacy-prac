@@ -101,13 +101,23 @@ textarea {
 	resize: none;
 	margin-top: 10px;
 }
+  .update_btn{
+   	    display: inline-block;
+	    width: 130px;
+	    background-color: #7b8ed1;
+	    padding-top: 10px;
+	    height: 27px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 18px;   	
+  	}
 </style>
 </head>
 
 <body>
 	<div class="wrapper_div">
 		<div class="subject_div">
-			리뷰 등록
+			리뷰 수정
 		</div>
 
 	</div>
@@ -131,50 +141,58 @@ textarea {
 			</div>
 			<div class="content_div">
 				<h4>리뷰</h4>
-				<textarea name="content"></textarea>
+				<textarea name="content">${replyInfo.content}</textarea>
 			</div>
 	</div>
 	
 	<div class="btn_wrap">
-			<a class="cancel_btn">취소</a><a class="enroll_btn">등록</a>
+			<a class="cancel_btn">취소</a><a class="update_btn">수정</a>
 	</div>
 	
 <script>
-	
-	/* 취소 버튼 */
-	$(".cancel_btn").on("click", function(e){
-		window.close();
-	});	
-	
-	/* 등록 버튼 */
-	$(".enroll_btn").on("click", function(e){
+$(document).ready(function(){
 
-		const clothesId = '${clothesInfo.clothesId}';
-		const memberId = '${memberId}';
-		const rating = $("select").val();
-		const content = $("textarea").val();
+	let rating = '${replyInfo.rating}';		
 
-		const data = {
-				clothesId : clothesId,
-				memberId : memberId,
-				rating : rating,
-				content : content
-		}		
-		
-		$.ajax({
-		    data : data,
-		    type : 'POST',
-		    url : "/reply/enroll",
-		    success : function(result){
-		    	/* 댓글 초기화 */
-				$(opener.location).attr("href", "javascript:replyListInit();");
-		        window.close();
-		        
-		    }
-		});
-		
-		
-	});
+	$("option").each(function(i,obj){
+		if(rating === $(obj).val()){
+			$(obj).attr("selected", "selected");
+		}
+	});		
+	
+});	
+/* 취소 버튼 */
+$(".cancel_btn").on("click", function(e){
+	window.close();
+});
+/* 등록 버튼 */
+$(".update_btn").on("click", function(e){
+	
+	const replyId = '${replyInfo.replyId}';
+	const clothesId = '${replyInfo.clothesId}';
+	const memberId = '${memberId}';
+	const rating = $("select").val();
+	const content = $("textarea").val();		
+	
+	const data = {
+			replyId : replyId,
+			clothesId : clothesId,
+			memberId : memberId,
+			rating : rating,
+			content : content
+	}	
+	
+	$.ajax({
+		data : data,
+		type : 'POST',
+		url : '/reply/update',
+		success : function(result){
+			$(opener.location).attr("href", "javascript:replyListInit();");
+			window.close();
+		}			
+	});		
+
+});
 </script>
 
 </body>

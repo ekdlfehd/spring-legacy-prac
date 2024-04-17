@@ -1034,6 +1034,16 @@ aside header img{
     margin-top: 20px;
     border-bottom: 1px solid #ccc; /* 아래쪽에 border 추가 */
 }
+.content_bottom{
+	width: 100%;
+    min-height: 300px;
+    text-align: center;
+    margin: 50px;
+    padding: 20px;
+    background-color: #f8f8f8; /* 배경색 추가 */
+    border-radius: 10px; /* 보더 모서리를 둥글게 만듦 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
 
 
 
@@ -1050,11 +1060,7 @@ aside header img{
 			margin-bottom: 40px;
 		}
   	
-  	.content_bottom{
-		width: 100%;
-		min-height: 400px;
-	    background-color: #e7dbdb;  	
-  	}	
+
 /* 리뷰쓰기 버튼 */
   .reply_button_wrap{
   	padding : 10px;
@@ -1071,11 +1077,6 @@ aside header img{
   	background-color: #1347e7;
   }
   
-  /* 리뷰 영역 */
-  	.content_bottom{
-  		width: 80%;
-  		margin : auto;
-  	}
 	.reply_content_ul{
 		list-style: none;
 	}
@@ -1178,3 +1179,13 @@ aside header img{
     color: white; 
   	cursor: pointer;
   }
+  .update_btn{
+   	    display: inline-block;
+	    width: 130px;
+	    background-color: #7b8ed1;
+	    padding-top: 10px;
+	    height: 27px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 18px;   	
+  	}

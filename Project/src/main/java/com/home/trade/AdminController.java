@@ -39,8 +39,10 @@ import com.home.model.AttachImageVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
 import com.home.model.PageDTO;
+import com.home.model.ReplyDTO;
 import com.home.service.AdminService;
 import com.home.service.ClothesService;
+import com.home.service.ReplyService;
 
 import util.Common;
 
@@ -54,6 +56,8 @@ public class AdminController {
 	private AttachMapper attachMapper;
 	@Autowired
 	private ClothesService clothesService;
+	@Autowired
+	private ReplyService replyService;
 	
 	// 관리자 페이지 이동
 	@RequestMapping("admin.do")
@@ -362,4 +366,16 @@ public class AdminController {
 		
 		return Common.VIEW_PATH +"replyEnroll.jsp";
 	}
+	
+	/* 댓글 수정 팝업창*/
+	@GetMapping("/replyUpdate")
+	public String replyUpdateWindowGET(ReplyDTO dto, Model model) {
+		ClothesVO clothes = clothesService.getClothesIdName(dto.getClothesId());
+		model.addAttribute("clothesInfo", clothes);
+		model.addAttribute("replyInfo", replyService.getUpdateReply(dto.getReplyId()));
+		model.addAttribute("memberId", dto.getMemberId());
+		
+		return Common.VIEW_PATH +"replyUpdate.jsp";
+	}
+	
 }
