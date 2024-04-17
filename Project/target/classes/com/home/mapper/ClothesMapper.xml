@@ -66,13 +66,14 @@
 		select clothesName from clothes where clothesName like '%' || #{keyword} || '%'
 	</select>
 
-	<!-- 상품 정보 -->
 	<select id="getGoodsInfo" resultType="com.home.model.ClothesVO">
-			select a.CLOTHESID, a.CLOTHESNAME,a.regdate, a.updatedate, a.CATECODE, c.CATENAME, a.CLOTHESPRICE, a.CLOTHESSTOCK, a.CLOTHESDISCOUNT, a.CLOTHESINTRO
-			from clothes a left outer join trade_cate c on a.catecode = c.catecode
-			where clothesId = #{clothesId}	
-	
+    select a.CLOTHESID, a.CLOTHESNAME, a.regdate, a.updatedate, a.CATECODE, c.CATENAME, a.CLOTHESPRICE, a.CLOTHESSTOCK, a.CLOTHESDISCOUNT, a.CLOTHESINTRO
+    from clothes a
+    left outer join trade_cate c on a.catecode = c.catecode
+    where clothesId = #{clothesId}
 	</select>
+
+
 	
 	<select id="getClothesIdName" resultType="com.home.model.ClothesVO">
 	

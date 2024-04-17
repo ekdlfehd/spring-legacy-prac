@@ -27,7 +27,7 @@
 			<div class = "top_links">
 					
 					<a href = "#" class = "sprite wishlist">wishlist</a>
-					<a href = "cart_list.do" class = "sprite cart" data-cart-count= "0">cart</a>
+					<a href = "/cart/${member.memberId}" class = "sprite cart" data-cart-count= "0">cart</a>
 			</div>
 		</header>
 		

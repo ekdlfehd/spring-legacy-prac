@@ -18,7 +18,7 @@ public class CartInterceptor implements HandlerInterceptor{
 			MemberVO mvo = (MemberVO)session.getAttribute("member");
 		
 			if(mvo == null) {
-				response.sendRedirect("login.do");
+				response.sendRedirect("login_start.do");
 				return false;
 			} else {
 				return true;

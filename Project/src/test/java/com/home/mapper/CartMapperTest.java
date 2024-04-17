@@ -16,23 +16,23 @@ public class CartMapperTest {
 	
 	@Autowired
 	private CartMapper cartMapper;
-	@Test
-	public void addCart() {
-		String memberId = "adminCk2";
-		int clothesId = 35;
-		int count = 1;
-		
-		CartDTO cart = new CartDTO();
-		cart.setMemberId(memberId);
-		cart.setCartId(clothesId);
-		cart.setClothesCount(count);
-		
-		int result = 0;
-		result = cartMapper.addCart(cart);
-		
-		System.out.println("결과 : " + result);
-		
-	}	
+//	@Test
+//	public void addCart() {
+//		String memberId = "a123512341235";
+//		int clothesId = 622;
+//		int count = 1;
+//		
+//		CartDTO cart = new CartDTO();
+//		cart.setMemberId(memberId);
+//		cart.setCartId(clothesId);
+//		cart.setClothesCount(count);
+//		
+//		int result = 0;
+//		result = cartMapper.addCart(cart);
+//		
+//		System.out.println("결과 : " + result);
+//		
+//	}	
 
 	
 	/* 카트 삭제 */
@@ -62,21 +62,21 @@ public class CartMapperTest {
 	
 	/* 카트 목록 */ 
 
-//	@Test
-//	public void getCartTest() {
-//		String memberId = "adminCk";
-//		
-//		
-//		List<CartDTO> list = cartMapper.getCart(memberId);
-//		for(CartDTO cart : list) {
-//			System.out.println(cart);
-//			cart.initSaleTotal();
-//			System.out.println("init cart : " + cart);
-//		}
-//		
-//	
-//	}
-//			
+	@Test
+	public void getCartTest() {
+		String memberId = "adminCk";
+		
+		
+		List<CartDTO> list = cartMapper.getCart(memberId);
+		for(CartDTO cart : list) {
+			System.out.println(cart);
+			cart.initSaleTotal();
+			System.out.println("init cart : " + cart);
+		}
+		
+	
+	}
+			
 	/* 카트 확인 */
 //
 //	@Test

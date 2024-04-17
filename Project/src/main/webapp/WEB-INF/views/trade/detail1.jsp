@@ -20,7 +20,7 @@
 				<h2>Outerwear</h2>
 			</div>
 			<div class = "top_links">
-				<a href = "cart_list.do" class = "sprite cart" data-cart-count= "0">cart</a>
+				<a href = "/cart/${member.memberId}" class = "sprite cart" data-cart-count= "0">cart</a>
 			</div>
 		</header>
 		

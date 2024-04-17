@@ -1,12 +1,14 @@
 package com.home.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.home.model.ClothesVO;
+import com.home.model.CartDTO;
 import com.home.service.ClothesService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -16,6 +18,8 @@ public class ClothesMapperTest {
 	private ClothesMapper clothesMapper;
 	@Autowired
 	private ClothesService clothesService;
+	@Autowired
+	private CartMapper cartMapper;
 	
 //	@Test
 //	public void getGoodsListTest() {
@@ -107,18 +111,87 @@ public class ClothesMapperTest {
 //		
 //	}
 	/*상품 상세 정보*/
+//	@Test
+//	public void getGoodsInfoTest() {
+//		
+//		int clothesId = 600;
+//		
+//		ClothesVO goodsInfo = clothesService.getGoodsInfo(clothesId);
+//		
+//		System.out.println("==결과==");
+//		System.out.println("전체 : " + goodsInfo);
+//		System.out.println("clothesId : " + goodsInfo.getClothesId() );
+//		System.out.println("이미지 정보 : " + goodsInfo.getImageList().isEmpty());
+//		
+//		
+//	}
+	/* 상품 정보 */
+//	@Test
+//	public void getGoodsInfo() {
+//		int clothesId = 26;
+//		ClothesVO goodsInfo = clothesMapper.getGoodsInfo(clothesId);
+//		System.out.println("===========================");
+//		System.out.println(goodsInfo);
+//		System.out.println("===========================");
+//		
+//	}
+	/*상품 상세 정보*/
+//	@Test
+//	public void addCart() {
+//		String memberId = "adminCk";
+//		int clothesId = 622;
+//		int count = 2;
+//		
+//		CartDTO cart = new CartDTO();
+//		cart.setMemberId(memberId);
+//		cart.setClothesId(clothesId);
+//		cart.setClothesCount(count);
+//		
+//		int result = 0;
+//		result = cartMapper.addCart(cart);
+//		 
+//		System.out.println("결과 : " + result);
+//		
+//	}
+	
+	/* 카트 삭제 */
+
+//	@Test
+//	public void deleteCartTest() {
+//		int cartId = 3;
+//		
+//		cartMapper.deleteCart(cartId);
+//
+//	
+//
+//	}
+	/* 카트 수량 수정 */
+
+//	@Test
+//	public void modifyCartTest() {
+//		int cartId = 6;
+//		int count = 5;
+//		
+//		CartDTO cart = new CartDTO();
+//		cart.setCartId(cartId);
+//		cart.setClothesCount(count);
+//		
+//		cartMapper.modifyCount(cart);
+//		
+//	}
 	@Test
-	public void getGoodsInfoTest() {
-		
-		int clothesId = 600;
-		
-		ClothesVO goodsInfo = clothesService.getGoodsInfo(clothesId);
-		
-		System.out.println("==결과==");
-		System.out.println("전체 : " + goodsInfo);
-		System.out.println("clothesId : " + goodsInfo.getClothesId() );
-		System.out.println("이미지 정보 : " + goodsInfo.getImageList().isEmpty());
+	public void getCartTest() {
+		String memberId = "adminCk";
 		
 		
+		List<CartDTO> list = cartMapper.getCart(memberId);
+		for(CartDTO cart : list) {
+			System.out.println(cart);
+			cart.initSaleTotal();
+			System.out.println("init cart : " + cart);
+		}
+		
+		
+	
 	}
 }

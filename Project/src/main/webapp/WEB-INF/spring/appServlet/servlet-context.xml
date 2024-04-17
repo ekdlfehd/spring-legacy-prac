@@ -23,11 +23,34 @@
 	
 	<!-- 업로드 관련 빈 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
+	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/member/login_start.do"/>
+			<beans:bean id="LoginInterceptor" class="com.home.interceptor.CartInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<beans:bean id="AdminInterceptor" class="com.home.interceptor.CartInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/cart/**"/>
+			<exclude-mapping path="/cart/add"/>
 			<beans:bean id="cartInterceptor" class="com.home.interceptor.CartInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	
 	
 </beans:beans>
