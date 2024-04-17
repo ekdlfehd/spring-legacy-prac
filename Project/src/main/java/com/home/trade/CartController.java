@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.home.model.CartDTO;
-import com.home.model.ClothesVO;
 import com.home.model.MemberVO;
 import com.home.service.CartService;
 
@@ -46,7 +45,9 @@ public class CartController {
 	
 	@GetMapping("/cart/{memberId}")
 	public String cartPageGET(@PathVariable("memberId") String memberId, Model model) {
-		model.addAttribute("cartInfo", cartService.getCartList(memberId));
+		List<CartDTO> cartInfo = cartService.getCartList(memberId);
+		model.addAttribute("cartInfo", cartInfo);
+		//model.addAttribute("cartInfo", cartService.getCartList(memberId));
 	    return Common.VIEW_PATH +"cart.jsp";
 	}
 
