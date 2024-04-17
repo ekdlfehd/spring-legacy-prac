@@ -1179,13 +1179,3 @@ aside header img{
     color: white; 
   	cursor: pointer;
   }
-  .update_btn{
-   	    display: inline-block;
-	    width: 130px;
-	    background-color: #7b8ed1;
-	    padding-top: 10px;
-	    height: 27px;
-	    color: #fff;
-	    font-size: 14px;
-	    line-height: 18px;   	
-  	}
