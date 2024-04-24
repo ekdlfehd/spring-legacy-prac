@@ -1,5 +1,7 @@
 package com.home.model;
 
+import java.util.List;
+
 public class CartDTO {
 	private int cartId;
     
@@ -25,6 +27,9 @@ public class CartDTO {
     private int point;
     
     private int totalPoint;
+    
+    /* 상품 이미지 */
+	private List<AttachImageVO> imageList;
     
     
 	public int getPoint() {
@@ -114,6 +119,14 @@ public class CartDTO {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
 
 	public void initSaleTotal() {
 		this.salePrice = (int) (this.clothesPrice * (1-this.clothesDiscount));
@@ -127,8 +140,10 @@ public class CartDTO {
 		return "CartDTO [cartId=" + cartId + ", memberId=" + memberId + ", clothesId=" + clothesId + ", clothesCount="
 				+ clothesCount + ", clothesName=" + clothesName + ", clothesPrice=" + clothesPrice
 				+ ", clothesDiscount=" + clothesDiscount + ", salePrice=" + salePrice + ", totalPrice=" + totalPrice
-				+ ", point=" + point + ", totalPoint=" + totalPoint + "]";
+				+ ", point=" + point + ", totalPoint=" + totalPoint + ", imageList=" + imageList + "]";
 	}
+
+
 	
 	
     

@@ -21,6 +21,16 @@ time, mark, audio, video {
 	
 }
 /* HTML5 display-role reset for older browsers */
+span.clothesprice_color1 {
+	text-decoration: line-through; 
+  color: black;
+}
+span.clothesprice_color2 {
+    color: red;
+}
+span.clothesprice_color3{
+	color:green;
+}	
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;

@@ -50,5 +50,24 @@ public class CartController {
 		//model.addAttribute("cartInfo", cartService.getCartList(memberId));
 	    return Common.VIEW_PATH +"cart.jsp";
 	}
+	
+	/* 장바구니 수량 수정 */
+	@PostMapping("/cart/update")
+	public String updateCartPOST(CartDTO cart) {
+		
+		cartService.modifyCount(cart);
+		
+		return "redirect:/cart/" + cart.getMemberId();
+		
+	}
 
+	/* 장바구니 삭제 */
+	@PostMapping("/cart/delete")
+	public String deleteCartPOST(CartDTO cart) {
+		
+		cartService.deleteCart(cart.getCartId());
+		
+		return "redirect:/cart/" + cart.getMemberId();
+		
+	}
 }
