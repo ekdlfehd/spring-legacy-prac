@@ -45,6 +45,7 @@
 							<input type="hidden" class="individual_totalPrice_input" value="${ci.salePrice * ci.clothesCount}">
 							<input type="hidden" class="individual_point_input" value="${ci.point}">
 							<input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">
+							<input type="hidden" class="individual_clothesId_input" value="${ci.clothesId}">
 							</li>
 						
 							<li>
@@ -98,13 +99,17 @@
 						<span class="totalPoint_span">$ 899.00</span>
 					</div>
 				</div>
-				<button class="btn big">check out</button>
+				<a class="btn big order_btn">주문하기</a>
 			</form>
 		</div>
 		<!-- 삭제 form -->
 			<form action="/cart/delete" method="post" class="quantity_delete_form">
 				<input type="hidden" name="cartId" class="delete_cartId">
 				<input type="hidden" name="memberId" value="${member.memberId}">
+			</form>
+		<!-- 주문 form -->
+			<form action="/order/${member.memberId}" method="get" class="order_form">
+
 			</form>
 	</main>
 
@@ -188,6 +193,36 @@ $(".cart_item_del").on("click", function(e){
 	const cartId = $(this).data("cartid");
 	$(".delete_cartId").val(cartId);
 	$(".quantity_delete_form").submit();
+});
+
+/* 주문 페이지 이동 */	
+$(".order_btn").on("click", function(){
+	
+	let form_contents ='';
+	let orderNumber = 0;
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+			
+			let clothesId = $(element).find(".individual_clothesId_input").val();
+			let clothesCount = $(element).find(".individual_clothesCount_input").val();
+			
+			let clothesId_input = "<input name='orders[" + orderNumber + "].clothesId' type='hidden' value='" + clothesId + "'>";
+			form_contents += clothesId_input;
+			
+			let clothesCount_input = "<input name='orders[" + orderNumber + "].clothesCount' type='hidden' value='" + clothesCount + "'>";
+			form_contents += clothesCount_input;
+			
+			orderNumber += 1;
+			
+		}
+	});	
+
+	$(".order_form").html(form_contents);
+	console.log($(".order_form").html());
+	$(".order_form").submit();
+	
 });
 
 

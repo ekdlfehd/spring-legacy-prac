@@ -14,7 +14,8 @@
 									   #{memberNumber},
 									   #{adminCk},
 									   sysdate,
-									   5000)
+									   5000,
+									   10000)
 	</insert>
 	
 	
@@ -25,8 +26,17 @@
 	
 	<!-- 로그인 -->
 	<select id = "memberLogin" resultType="com.home.model.MemberVO">
-		select memberId, memberPw, memberName, adminCk, point from shop_member where memberId = #{memberId}
+		select memberId, memberPw, memberName, adminCk, point ,money from shop_member where memberId = #{memberId}
 	</select>
+	
+	<!-- 주문자 정보 -->
+  	<select id="getMemberInfo" resultType="com.home.model.MemberVO">
+  	
+  		SELECT memberId, memberName, memberMail, memberAddr1, memberAddr2, memberAddr3, point, money
+  		FROM shop_member 
+  		WHERE memberId = #{memberId}
+  	
+  	</select>
 	
 	
 </mapper>

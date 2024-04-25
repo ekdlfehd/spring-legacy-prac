@@ -9,5 +9,7 @@ public interface MemberMapper {
 	public int idCheck(String memberId);
 	//로그인
 	public MemberVO memberLogin(MemberVO member);
+	/* 주문자 주소 정보 */
+	public MemberVO getMemberInfo(String memberId);
 	
 }
