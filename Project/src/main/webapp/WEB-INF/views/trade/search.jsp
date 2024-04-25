@@ -163,6 +163,8 @@
 					<span>회원아이디 : ${member.memberId}</span> <span>이름 :
 						${member.memberName}</span> <span>포인트 : <fmt:formatNumber
 							value="${member.point }" pattern="#,###" /></span>
+														<span>보유금액 : <fmt:formatNumber
+							value="${member.money }" pattern="#,###" /></span>
 					<div class="login_menu">
 						<a href="logout.do">로그아웃</a>
 					</div>

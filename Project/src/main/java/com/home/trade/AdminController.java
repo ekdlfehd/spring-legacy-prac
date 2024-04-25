@@ -38,6 +38,7 @@ import com.home.mapper.AttachMapper;
 import com.home.model.AttachImageVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
+import com.home.model.OrderDTO;
 import com.home.model.PageDTO;
 import com.home.model.ReplyDTO;
 import com.home.service.AdminService;
@@ -376,6 +377,21 @@ public class AdminController {
 		model.addAttribute("memberId", dto.getMemberId());
 		
 		return Common.VIEW_PATH +"replyUpdate.jsp";
+	}
+	
+	/* 주문 현황 페이지 */
+	@GetMapping("/admin/orderList")
+	public String orderListGET(Criteria cri, Model model) {
+		List<OrderDTO> list = adminService.getOrderList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageMaker", new PageDTO(cri, adminService.getOrderTotal(cri)));
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+		
+		return Common.ADMIN +"orderList.jsp";
 	}
 	
 }

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderList.css">
 <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
 <script
@@ -46,9 +46,9 @@
                             <a href = "register_list.do" class="admin_list_02">상품 목록</a>
                             
                         </li>
-                        <lI>
-                            <a class="admin_list_05">회원 관리</a>                            
-                        </lI>                                                                                             
+						<li>
+	                      <a class="admin_list_06" href="/admin/orderList">주문 현황</a>                            
+	                    </li>                                                                                            
                     </ul>
 <!-- 
                     <div class="admin_list_01">

@@ -6,6 +6,7 @@ import com.home.model.AttachImageVO;
 import com.home.model.CateVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
+import com.home.model.OrderDTO;
 
 public interface AdminService {
 
@@ -35,4 +36,9 @@ public interface AdminService {
 	
 	/* 이미지 정보 삭제*/
 	public int deleteImageAll(int clothesId);
+	/* 주문 상품 리스트 */
+	public List<OrderDTO> getOrderList(Criteria cri);
+	
+	/* 주문 총 갯수 */
+	public int getOrderTotal(Criteria cri);
 }

@@ -12,6 +12,7 @@ import com.home.model.AttachImageVO;
 import com.home.model.CateVO;
 import com.home.model.ClothesVO;
 import com.home.model.Criteria;
+import com.home.model.OrderDTO;
 
 
 
@@ -97,5 +98,16 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteImageAll(int clothesId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	/* 주문 상품 리스트 */
+	@Override
+	public List<OrderDTO> getOrderList(Criteria cri) {
+	    return adminMapper.getOrderList(cri);
+	}
+
+	/* 주문 총 갯수 */
+	@Override
+	public int getOrderTotal(Criteria cri) {
+		return adminMapper.getOrderTotal(cri);
 	}
 }

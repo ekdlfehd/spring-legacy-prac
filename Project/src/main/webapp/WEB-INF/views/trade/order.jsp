@@ -64,7 +64,12 @@
 								<tr>
 									<th>주소</th>
 									<td>
-										${memberInfo.memberAddr1} ${memberInfo.memberAddr2}<br>${memberInfo.memberAddr3}										
+										${memberInfo.memberAddr1} ${memberInfo.memberAddr2}<br>${memberInfo.memberAddr3}	
+										<input class="selectAddress" value="T" type="hidden">
+										<input class="addressee_input" value="${memberInfo.memberName}" type="hidden">
+										<input class="address1_input" type="hidden" value="${memberInfo.memberAddr1}">
+										<input class="address2_input" type="hidden" value="${memberInfo.memberAddr2}">
+										<input class="address3_input" type="hidden" value="${memberInfo.memberAddr3}">									
 									</td>
 								</tr>
 							</tbody>
@@ -86,6 +91,7 @@
 								<tr>
 									<th>주소</th>
 										<td>
+											<input class="selectAddress" value="F" type="hidden">
 											<input class="address1_input" readonly="readonly"> <a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a><br>
 											<input class="address2_input" readonly="readonly"><br>
 											<input class="address3_input" readonly="readonly">
@@ -212,27 +218,26 @@
 		<a class="btn big order_btn1">결제하기</a>
 	</form>
 </div> 
-		
+<!-- 주문 요청 form -->
+		<form class="order_form" action="/order" method="post">
+			<!-- 주문자 회원번호 -->
+			<input name="memberId" value="${memberInfo.memberId}" type="hidden">
+			<!-- 주소록 & 받는이-->
+			<input name="addressee" type="hidden">
+			<input name="memberAddr1" type="hidden">
+			<input name="memberAddr2" type="hidden">
+			<input name="memberAddr3" type="hidden">
+			<!-- 사용 포인트 -->
+			<input name="usePoint" type="hidden">
+			<!-- 상품 정보 -->
+		</form>		
 </main>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
-/* 시작 */
+/* 시작 */	
 $(document).ready(function(){
 	
 	/* 주문 조합정보란 최신화 */
@@ -268,8 +273,15 @@ function showAdress(className){
 	/* 버튼 색상 변경 */
 		/* 모든 색상 동일 */
 			$(".address_btn").css('backgroundColor', '#555');
-		/* 지정 색상 변경 */
-			$(".address_btn_"+className).css('backgroundColor', '#3c3838');	
+	/* 지정 색상 변경 */
+		$(".address_btn_"+className).css('backgroundColor', '#3c3838');	
+	/* selectAddress T/F */
+	/* 모든 selectAddress F만들기 */
+		$(".addressInfo_input_div").each(function(i, obj){
+			$(obj).find(".selectAddress").val("F");
+		});
+	/* 선택한 selectAdress T만들기 */
+		$(".addressInfo_input_div_" + className).find(".selectAddress").val("T");
 }
 
 /* 다음 주소 연동 */
@@ -425,6 +437,38 @@ function setTotalInfo() {
     $(".usePoint_span").text(usePoint.toLocaleString());
 } //총주문정보세팅
 
+/* 주문 요청 */
+$(".order_btn1").on("click", function(){
+
+	/* 주소 정보 & 받는이*/
+	$(".addressInfo_input_div").each(function(i, obj){
+		if($(obj).find(".selectAddress").val() === 'T'){
+			$("input[name='addressee']").val($(obj).find(".addressee_input").val());
+			$("input[name='memberAddr1']").val($(obj).find(".address1_input").val());
+			$("input[name='memberAddr2']").val($(obj).find(".address2_input").val());
+			$("input[name='memberAddr3']").val($(obj).find(".address3_input").val());
+		}
+	});	
+	
+	/* 사용 포인트 */
+	$("input[name='usePoint']").val($(".order_point_input").val());	
+	
+	/* 상품정보 */
+	let form_contents = ''; 
+	$(".goods_table_price_td").each(function(index, element){
+		let clothesId = $(element).find(".individual_clothesId_input").val();
+		let clothesCount = $(element).find(".individual_clothesCount_input").val();
+		let clothesId_input = "<input name='orders[" + index + "].clothesId' type='hidden' value='" + clothesId + "'>";
+		form_contents += clothesId_input;
+		let clothesCount_input = "<input name='orders[" + index + "].clothesCount' type='hidden' value='" + clothesCount + "'>";
+		form_contents += clothesCount_input;
+	});	
+	$(".order_form").append(form_contents);	
+	
+	/* 서버 전송 */
+	$(".order_form").submit();	
+	
+});
 
 
 
