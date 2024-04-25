@@ -16,8 +16,8 @@
 ### ⚙️ 개발 환경
 - `자바 11.0.18`
 - `JDK 버전: 11.0.18+9-LTS-195`
-- **IDE** : STS 3.9
--**프레임워크** : Spring Tool Suite3 - 3.9.18.RELEASE
+- **IDE** : Spring Tool Suite3 - 3.9.18.RELEASE
+-**프레임워크** : Spring
 -**Database** : Oracle DB(11xe)
 -**ORM** : 마이바티스
 
