@@ -1,17 +1,12 @@
-# 스프링-프로젝트- 의류 쇼핑몰
+# 스프링 -프로젝트- 의류 쇼핑몰
 
 ## 🖥️ 프로젝트 소개
-1. 회원가입(관리자,일반회원)
-2. 로그인
-3. 장바구니
-4. 결제시스템
-5. 관리자페이지(상품등록,상품목록,주문현황)
-6. 상품검색 후 상품상세페이지
+여러가지 참고해서 의류쇼핑몰을 만들어 보았습니다.
 <br>
 
 ### 🧑‍🤝‍🧑 맴버구성
 
-안정민
+안정민(Solo Project)
 
 ### ⚙️ 개발 환경
 - `Java 11.0.18`
@@ -22,7 +17,8 @@
 - **ORM** : Mybatis
   
 ## 📌 주요 기능
-#### 로그인 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login) " >상세보기 - WIKI 이동</a>
+
+#### 로그인 - <a href="https://github.com/ekdlfehd/spring-legacy-prac/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A1%9C%EA%B7%B8%EC%9D%B8,%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83,%EB%A9%94%EC%9D%B8%EB%B7%B0%EC%9D%B4%EB%AF%B8%EC%A7%80)" >상세보기 - WIKI 이동</a>
 - DB값 검증
 - ID찾기, PW찾기
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
