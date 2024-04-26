@@ -6,7 +6,7 @@
 
 ### 🧑‍🤝‍🧑 맴버구성
 
-안정민(Solo Project)
+- 안정민(Solo Project)
 
 ### ⚙️ 개발 환경
 - `Java 11.0.18`
