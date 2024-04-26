@@ -23,11 +23,11 @@
 - DB 요청하여 아이디, 비번 일치 여부 확인
 - Ajax를 사용하여 오류시 Text 뿌리기
 - 로그인 시 세션(Session) 생성
-- 
+  
 ### ✔️ 회원가입 - <a href="https://github.com/ekdlfehd/spring-legacy-prac/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85) " >상세보기 - WIKI 이동</a>
 - 주소 API 연동
 - ID 중복 체크
-- 
+  
 ### ✔️ 상품 조회 / 상품정보 - <a href="https://github.com/ekdlfehd/spring-legacy-prac/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%83%81%ED%92%88%EC%A1%B0%ED%9A%8C,%EC%83%81%ED%92%88%EC%A0%95%EB%B3%B4)" >상세보기 - WIKI 이동</a>
 - 메인 페이지에 상품 검색
 - 키워드에 맞는 제품 나열
