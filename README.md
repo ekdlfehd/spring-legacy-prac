@@ -37,7 +37,7 @@
 
 ### ✔️ 관리자 페이지1(상품 목록)- <a href="https://github.com/ekdlfehd/spring-legacy-prac/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%EA%B4%80%EB%A6%AC%EC%9E%90-%ED%8E%98%EC%9D%B4%EC%A7%801-%22-%EC%83%81%ED%92%88%EB%AA%A9%EB%A1%9D-%22-)" >상세보기 - WIKI 이동</a>
 - 기업회원으로 가입해야 보이는 관리자페이지
-- 상품목록 나
+- 상품목록 나열 
 - 상품 상세 정보
 - 페이징처리
 - 상품조회,읽기,수정,삭제(CRUD게시판)
