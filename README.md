@@ -7,7 +7,10 @@
 ### 🎥
 <details>
 <summary><b> -시연 영상- </b></summary>
-
+  
+<br>
+<br>
+<br>
 [![동영상 썸네일](https://github.com/ekdlfehd/shopping/blob/main/thumb.png)](https://vimeo.com/939968119)
 <br>
 <br>
@@ -16,6 +19,7 @@
 <br>
 <br>
 <br>
+
 ### 🧑‍🤝‍🧑 맴버구성
 
 - 안정민(Solo Project)
