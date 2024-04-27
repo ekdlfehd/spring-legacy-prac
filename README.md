@@ -12,7 +12,10 @@
 <br>
 <br>
 
-[![동영상 썸네일](https://github.com/ekdlfehd/shopping/blob/main/thumb.png)](https://vimeo.com/939968119)
+<a href="https://vimeo.com/939968119">
+  <img src="https://github.com/ekdlfehd/shopping/blob/main/thumb.png" alt="동영상 썸네일" width="500">
+</a>
+
 
 <br>
 <br>
