@@ -4,7 +4,7 @@
 여러가지 참고해서 의류쇼핑몰을 만들어 보았습니다.
 <br>
 
-[![동영상 썸네일](https://i.vimeocdn.com/video/동영상_썸네일.jpg)](https://vimeo.com/939968119)
+[![동영상 썸네일](https://github.com/ekdlfehd/shopping/blob/main/thumb.png)](https://vimeo.com/939968119)
 ### 🧑‍🤝‍🧑 맴버구성
 
 - 안정민(Solo Project)
