@@ -5,6 +5,13 @@
 <br>
 
 [![동영상 썸네일](https://github.com/ekdlfehd/shopping/blob/main/thumb.png)](https://vimeo.com/939968119)
+
+### 🎥
+<details>
+<summary><b>시연 영상입니다.</b></summary>
+
+[![동영상 썸네일](https://github.com/ekdlfehd/shopping/blob/main/thumb.png)](https://vimeo.com/939968119)
+</details>
 ### 🧑‍🤝‍🧑 맴버구성
 
 - 안정민(Solo Project)
