@@ -6,7 +6,7 @@
 
 ## 🎥
 <details>
-<summary><b> -시연 영상- </b></summary>
+<summary><b> 시연 영상 (사진클릭하세요) </b></summary>
   
 <br>
 <br>
